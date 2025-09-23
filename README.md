@@ -2,6 +2,8 @@
 
 [![GitHub license](https://img.shields.io/github/license/jbox-web/page_title_helper.svg)](https://github.com/jbox-web/page_title_helper/blob/master/LICENSE)
 [![CI](https://github.com/jbox-web/page_title_helper/workflows/CI/badge.svg)](https://github.com/jbox-web/page_title_helper/actions)
+[![Maintainability](https://qlty.sh/badges/f914656c-1900-4579-8b62-babd4c364c11/maintainability.svg)](https://qlty.sh/gh/jbox-web/projects/page_title_helper)
+[![Code Coverage](https://qlty.sh/badges/f914656c-1900-4579-8b62-babd4c364c11/coverage.svg)](https://qlty.sh/gh/jbox-web/projects/page_title_helper)
 
 This project adheres to [Semantic Versioning](https://semver.org/).
 

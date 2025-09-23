@@ -62,3 +62,9 @@ jobs:
 
       - name: Run RSpec
         run: bin/rspec
+
+      - name: Publish code coverage
+        uses: qltysh/qlty-action/coverage@v1
+        with:
+          token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+          files: coverage/coverage.json
