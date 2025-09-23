@@ -1,21 +1,31 @@
 # frozen_string_literal: true
 
-# This line can be dropped once we no longer support Rails 7.0.
-require 'logger'
-# This line can be dropped once we no longer support Rails 7.1 and 7.2.
-require 'uri'
-require 'active_support'
-require 'action_view'
-require 'page_title_helper'
+require 'simplecov'
+require 'simplecov_json_formatter'
 
-unless defined?(IRB)
-  require 'active_support/test_case'
-  require 'shoulda'
+require 'action_view'
+
+# This line can be dropped once we no longer support Rails 7.2
+require 'uri'
+
+# Start SimpleCov
+SimpleCov.start do
+  formatter SimpleCov::Formatter::MultiFormatter.new([SimpleCov::Formatter::HTMLFormatter, SimpleCov::Formatter::JSONFormatter])
+  add_filter 'spec/'
 end
 
-# Use sorted tests. We need to change that after the tests have been converted
-# to RSpec.
-ActiveSupport.test_order = :sorted
+RSpec.configure do |config|
+  config.order = :random
+  Kernel.srand config.seed
+
+  config.expect_with :rspec do |c|
+    c.syntax = :expect
+  end
+
+  # disable monkey patching
+  # see: https://relishapp.com/rspec/rspec-core/v/3-8/docs/configuration/zero-monkey-patching-mode
+  config.disable_monkey_patching!
+end
 
 # fake global Rails module
 module Rails
@@ -45,3 +55,5 @@ class TestView < ActionView::Base
     params[:action] = action
   end
 end
+
+require 'page_title_helper'

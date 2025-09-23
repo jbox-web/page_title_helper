@@ -7,10 +7,14 @@ gemspec
 # Dev libs
 gem 'appraisal', git: 'https://github.com/thoughtbot/appraisal.git'
 gem 'rake'
-gem 'shoulda', '~> 4.0.0'
+gem 'rspec-rails'
+gem 'simplecov'
 
 # Dev tools / linter
+gem 'guard-rspec',         require: false
 gem 'rubocop',             require: false
 gem 'rubocop-performance', require: false
 gem 'rubocop-rails',       require: false
 gem 'rubocop-rake',        require: false
+gem 'rubocop-rspec',       require: false
+gem 'rubocop-rspec_rails', require: false

@@ -14,7 +14,7 @@ en:
         title: New account
       edit:
         title: Edit account
-        
+
   placeholder: "Displaying %{name}"
   app:
     tagline: Default

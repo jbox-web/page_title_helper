@@ -8,7 +8,7 @@
 # Licence:: MIT-Licence (https://www.opensource.org/licenses/mit-license.php)
 #
 # See documentation for +page_title+ for usage examples and more information.
-require 'active_support'
+require 'active_support/all'
 
 # PageTitleHelper
 module PageTitleHelper

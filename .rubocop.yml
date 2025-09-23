@@ -3,6 +3,8 @@ plugins:
   - rubocop-performance
   - rubocop-rake
   - rubocop-rails
+  - rubocop-rspec
+  - rubocop-rspec_rails
 
 AllCops:
   NewCops: enable
@@ -20,3 +22,13 @@ Gemspec/RequireMFA:
 
 Layout/IndentationConsistency:
   EnforcedStyle: indented_internal_methods
+
+#########
+# RSPEC #
+#########
+
+RSpec/MultipleExpectations:
+  Max: 3
+
+RSpec/NestedGroups:
+  Max: 4
