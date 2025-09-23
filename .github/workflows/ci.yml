@@ -1,66 +1,64 @@
 ---
 name: CI
+
 on:
   push:
     branches:
-      - main
+      - '**'
   pull_request:
+    branches:
+      - '**'
   schedule:
-    - cron: '15 3 * * 1'
-jobs:
-  static-analysis:
-    name: 'Static analysis'
-    runs-on: ubuntu-24.04
-    timeout-minutes: 2
-    steps:
-      - uses: actions/checkout@v5
-      - name: 'Set up Ruby'
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.3.8'
-          bundler-cache: true
-      - name: 'Check the environment'
-        run: |
-          ruby --version
-          gem --version
-          bundle --version
-      - name: 'Run RuboCop'
-        run: |
-          bundle exec rubocop Gemfile \
-            gemfiles/Gemfile.rails-7.1 gemfiles/Gemfile.rails-7.2 \
-            gemfiles/Gemfile.rails-8.0 lib/ test/ Rakefile
+    - cron: '0 4 1 * *'
+  # Run workflow manually
+  workflow_dispatch:
 
-  test:
-    name: "Tests: Ruby ${{ matrix.ruby }} / Rails ${{ matrix.rails }}"
-    runs-on: ubuntu-24.04
-    timeout-minutes: 2
-    env:
-      BUNDLE_GEMFILE: "${{ github.workspace }}/gemfiles/Gemfile.rails-${{ matrix.rails }}"
+jobs:
+  rubocop:
+    runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v5
-      - name: 'Set up Ruby'
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '${{ matrix.ruby }}'
-          bundler-cache: true
-      - name: 'Check the environment'
-        run: |
-          ruby --version
-          gem --version
-          bundle --version
-          echo $BUNDLE_GEMFILE
-      - name: 'Run the tests'
-        run: 'bundle exec rake --trace test'
+          ruby-version: '3.2'
+
+      - name: Bundler
+        run: bundle install
+
+      - name: Rubocop
+        run: bin/rubocop
+
+  rspec:
+    runs-on: ubuntu-latest
+
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - { 'rails': '7.1', 'ruby': '3.2.8' }
-          - { 'rails': '7.1', 'ruby': '3.3.8' }
-          - { 'rails': '7.1', 'ruby': '3.4.6' }
-          - { 'rails': '7.2', 'ruby': '3.2.8' }
-          - { 'rails': '7.2', 'ruby': '3.3.8' }
-          - { 'rails': '7.2', 'ruby': '3.4.6' }
-          - { 'rails': '8.0', 'ruby': '3.2.8' }
-          - { 'rails': '8.0', 'ruby': '3.3.8' }
-          - { 'rails': '8.0', 'ruby': '3.4.6' }
+        ruby:
+          - '3.4'
+          - '3.3'
+          - '3.2'
+          - 'head'
+        rails:
+          - rails_8.0
+          - rails_7.2
+
+    env: # $BUNDLE_GEMFILE must be set at the job level, so it is set for all steps
+      BUNDLE_GEMFILE: ${{ github.workspace }}/gemfiles/${{ matrix.rails }}.gemfile
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+
+      - name: Run MiniTest
+        run: bin/rake

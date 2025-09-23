@@ -3,8 +3,8 @@
 require 'minitest/autorun'
 require 'test_helper'
 
-class PageTitleHelperTest < ActiveSupport::TestCase
-  context 'PageTitleHelper' do
+class PageTitleHelperTest < ActiveSupport::TestCase # rubocop:disable Metrics/ClassLength
+  context 'PageTitleHelper' do # rubocop:disable Metrics/BlockLength
     setup do
       I18n.load_path = [File.join(File.dirname(__FILE__), 'en.yml')]
       I18n.reload!
@@ -63,7 +63,7 @@ class PageTitleHelperTest < ActiveSupport::TestCase
       end
     end
 
-    context '#page_title (rendering)' do
+    context '#page_title (rendering)' do # rubocop:disable Metrics/BlockLength
       should 'read default title from I18n, based on controller/action' do
         assert_equal 'contacts.list.title - Page title helper', @view.page_title
       end

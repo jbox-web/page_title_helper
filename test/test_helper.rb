@@ -34,7 +34,7 @@ end
 class TestView < ActionView::Base
   attr_reader :controller
 
-  def initialize(controller_path = nil, action = nil)
+  def initialize(controller_path = nil, action = nil) # rubocop:disable Lint/MissingSuper
     @controller = ActionView::TestCase::TestController.new
     @controller.controller_path = controller_path
     params[:action] = action if action

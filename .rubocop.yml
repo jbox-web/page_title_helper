@@ -1,23 +1,22 @@
-inherit_from: .rubocop_todo.yml
-
-require:
+---
+plugins:
+  - rubocop-performance
   - rubocop-rake
   - rubocop-rails
 
 AllCops:
-  TargetRubyVersion: 3.2
-  TargetRailsVersion: 7.1
   NewCops: enable
-
-Layout/IndentationConsistency:
-  EnforcedStyle: indented_internal_methods
-
-Naming/FileName:
+  TargetRubyVersion: 3.2
   Exclude:
-    - 'gemfiles/Gemfile.*'
+    - bin/*
+    - gemfiles/*
 
 Gemspec/RequireMFA:
   Enabled: false
 
-Rails/RakeEnvironment:
-  Enabled: false
+##########
+# LAYOUT #
+##########
+
+Layout/IndentationConsistency:
+  EnforcedStyle: indented_internal_methods

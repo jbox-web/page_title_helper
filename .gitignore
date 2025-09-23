@@ -1,7 +1,12 @@
-/*.gemfile.lock
-/.bundle/
-/.yardoc
-/Gemfile.lock
-/doc/
-/pkg/
-/vendor/
+# Ignore bundler config.
+.bundle/
+
+# Ignore Gemfile.lock
+Gemfile.lock
+gemfiles/*.lock
+
+# Ignore test files
+coverage/
+
+# Ignore MacOS files
+.DS_Store

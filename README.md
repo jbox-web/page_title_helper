@@ -1,7 +1,7 @@
 # Page title helper
 
-[![GitHub CI Status](https://github.com/lwe/page_title_helper/workflows/CI/badge.svg?branch=main)](https://github.com/lwe/page_title_helper/actions)
-[![Gem Version](https://badge.fury.io/rb/page_title_helper.svg)](https://badge.fury.io/rb/page_title_helper)
+[![GitHub license](https://img.shields.io/github/license/jbox-web/page_title_helper.svg)](https://github.com/jbox-web/page_title_helper/blob/master/LICENSE)
+[![CI](https://github.com/jbox-web/page_title_helper/workflows/CI/badge.svg)](https://github.com/jbox-web/page_title_helper/actions)
 
 This project adheres to [Semantic Versioning](https://semver.org/).
 
@@ -33,15 +33,15 @@ The format etc. is of course configurable, just head down to the options.
 
 ## Installation
 
-As gem (from rubygems.org):
+Put this in your `Gemfile` :
 
 ```ruby
-# then add the following line to Gemfile
-gem 'page_title_helper'
+git_source(:github){ |repo_name| "https://github.com/#{repo_name}.git" }
 
-# living on the bleeding edge?
-gem 'page_title_helper', git: 'git://github.com/lwe/page_title_helper.git'
+gem 'page_title_helper', github: 'jbox-web/page_title_helper'
 ```
+
+then run `bundle install`.
 
 ## Translated titles
 
@@ -90,6 +90,7 @@ en:
 ```
 
 In `app/views/dashboard/index.html.erb`:
+
 ```html
 <h1><%= page_title!(t('.title', name: @user.first_name)) %></h1>
 ```
@@ -208,17 +209,6 @@ end
 _Note:_ Put this kind of stuff into an initializer, like
 `config/initializers/page_title_helper.rb` or something like that.
 
-## Contributing
-
-Pull request are more than welcome. Please adhere to our
-[code of conduct](CODE_OF_CONDUCT.md) in discussions and contributions.
-Thanks!
-
-## Maintainers
-
-* [@lwe - Lukas Westermann](https://github.com/lwe)
-* [@oliverklee - Oliver Klee](https://github.com/oliverklee)
-
 ## Licence and copyright
-Copyright (c) 2009 Lukas Westermann (Zurich, Switzerland), released under the
-MIT license
+
+Copyright (c) 2009 Lukas Westermann (Zurich, Switzerland), released under the MIT license
